@@ -7,30 +7,52 @@ html{
 .header{
     width: 100%;
     background:RGB(113,211,140);
-    line-height: 50px;
+    line-height: 0.5rem;
     border:2px solid #fff;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     border-radius:5px;
     text-align: center;
     color: #fff;
-    font-size:20px;
+    font-size:0.2rem;
     font-weight:bold;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin-top:0.1rem;
 }
 .view-num{
-    width:1rem;
-    line-height:1rem;
+    width:2rem;
+    line-height:2rem;
     text-align: center;
     font-weight:bold;
     color:#fff;
-    font-size: 0.5rem;
+    font-size: 1rem;
     border-radius:50%;
     border:2px solid #fff;
     position: absolute;
     top:100px;
     left:50%;
-    margin-left:-0.5rem;
+    margin-left:-1rem;
 }
+.start-btn{
+    height:1rem;
+    width:5rem;
+    border:2px solid #fff;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    line-height:1rem;
+    text-align: center;
+    font-size:0.5rem;
+    font-weight:bold;
+    position: absolute;
+    bottom:1rem;
+    left:50%;
+    color:#fff;
+    margin-left:-2.5rem;
+}
+
+
+
+
