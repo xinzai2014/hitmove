@@ -7,14 +7,14 @@ html{
 .header{
     width: 100%;
     background:RGB(113,211,140);
-    line-height: 0.5rem;
+    line-height: 1rem;
     border:2px solid #fff;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     border-radius:5px;
     text-align: center;
     color: #fff;
-    font-size:0.2rem;
+    font-size:0.5rem;
     font-weight:bold;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
