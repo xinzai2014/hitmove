@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新仔运动健身专用web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" >
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="style/reset.css" />
+    <link rel="stylesheet" href="style/fit.css" />
+    <script>
+        (function(win,doc){
+            function changeSize(){
+                doc.documentElement.style.fontSize=50*doc.documentElement.clientWidth/320+'px';
+            }
+            changeSize();
+            win.addEventListener('resize',changeSize,false);
+        })(window,document)
+    </script>
+
+</head>
+<body>
+<div class="header">
+    运动计时
+</div>
+</body>
+</html>
