@@ -64,10 +64,9 @@
 			var oNum=document.getElementById('num');
 			var oBtn=document.getElementById('btn');
 			var oView=document.getElementById('view');
-
+			var time1;
 			oBtn.onclick=function(){
 				getNum();
-
 			}
 
 			document.onkeydown=function(event){
@@ -83,12 +82,14 @@
 				if(!num){
 					alert('请输入正确格式的数值');
 				}else{
-					for(var i=0;i<=num;i++){
+					for(var i=0;i<=(num/2);i++){
 					if(num%i == 0){
 						arr.push(i);
 					}
 				}
+				arr.push(num);
 				oView.innerHTML=arr;
+				console.log(new Date().getTime()-time1);
 				}
 			}
 
