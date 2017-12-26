@@ -8,10 +8,17 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="apple-mobile-web-app-title" content="新仔应用--求余数">
 	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		hr{
+			margin:10px 0;
+		}
 		.all{
 			margin:20px 0 0 20px;
 		}
-		#num{
+		.txt{
 			width: 242px;
 			line-height: 30px;
 			height: 30px;
@@ -25,7 +32,10 @@
 			-moz-box-sizing: border-box;
 			-o-box-sizing: border-box;
 		}
-		#num:focus{
+		h2{
+			color:#228df5;
+		}
+		.txt:focus{
 			border-color:#228df5;
 			border-width: 2px; 
 			box-sizing: border-box;
@@ -35,7 +45,7 @@
 			-o-box-sizing: border-box;
 
 		}
-		#btn{
+		.btn{
 			line-height: 30px;
 			padding:0 10px;
 			background: #228df5;
@@ -44,7 +54,7 @@
 			font-size: 18px;
 			cursor: pointer;
 		}
-		#view{
+		.view{
 			padding:10px;
 			margin-top: 20px;
 			width: 300px;
@@ -57,6 +67,12 @@
 			-moz-box-sizing: border-box;
 			-o-box-sizing: border-box;
 			word-break:break-all;
+		}
+		.view p{
+			line-height: 20px;
+		}
+		.mtb10{
+			margin:10px 0;
 		}
 	</style>
 	<script type="text/javascript">
@@ -101,14 +117,118 @@
 </head>
 <body> 
 <div class="all">
-	<input type="number" id="num" />
-	<input type="button" value="求约" id="btn" />
-	<div class="view" id="view"></div>
+	<input type="number" id="num" class="txt" />
+	<input type="button" value="求约" id="btn" class="btn" />
+	<div class="view" id="view" class="view"></div>
 </div>
-<h2>请点击下方，听取音乐</h2>
-<div>
-	<audio src="./gogogo.m4a" controls></audio>
-</div>
-	
+<!--<h2>请点击下方，听取音乐</h2>-->
+<!--<div>-->
+	<!--<audio src="./gogogo.m4a" controls></audio>-->
+<!--</div>-->
+<hr>
+<h2>组合数值组匹配指定和功能</h2>
+<section class="all">
+	<input type="text" placeholder="请输入数值组，以一个空格分隔" id="grouptxt" class="txt mtb10"/><br />
+	<input type="text" class="txt" placeholder="输入指定和值" id="sumnum" />
+	<input type="button" value="求结果" class="btn" id="groupbtn">
+	<div class="view" id="groupview"></div>
+</section>
+
+<script>
+	var oGrouptxt=document.getElementById('grouptxt');
+	var oSumnum=document.getElementById('sumnum');
+	var oGroupBtn=document.getElementById('groupbtn');
+	var oGroupView = document.getElementById('groupview');
+	oGroupBtn.onclick=function(){
+        var getgroup=oGrouptxt.value;
+        var sunnum=Number(oSumnum.value);
+        var groupArr = getgroup.split(/\s/);
+        var orgArray=[];
+		for(var i=0;i<groupArr.length;i++){
+            orgArray.push(Number(groupArr[i]));
+		}
+        var targetValue=sunnum;
+        orgArray.sort(function(a, b) {
+            return a - b;
+        });
+		console.log(orgArray);
+        var subArray=[];
+        var findIndex=orgArray.findIndex(function(item){
+            return item>targetValue;
+        });
+
+        if(findIndex===-1){
+            subArray=orgArray;
+        }else{
+            subArray=orgArray.slice(0,findIndex);
+        }
+
+        var result=getMatchedGroup([{
+            value:0,
+            index:[]
+        }],subArray,targetValue);
+        //console.log(result);
+		console.log(result);
+		var content='';
+        result.forEach(function(item){
+            var str=item.map(function(valueIndex){
+                return orgArray[valueIndex];
+            }).join(',');
+            content+='<p>'+str+'</p>'
+
+        });
+        oGroupView.innerHTML=content;
+	}
+    function getcombinationAndMatched(initval,array,targetValue,someGroup){
+        var result=[];
+        var matched=[];
+        var startIndex;
+        if(someGroup.index.length===0){
+            startIndex=-1;
+        }else{
+            startIndex=someGroup.index[someGroup.index.length-1];
+        }
+        for(var i=startIndex+1;i<array.length;i++){
+            if(initval+array[i]<=targetValue) {
+                if(initval+array[i]===targetValue){
+                    matched.push(someGroup.index.slice(0).concat([i]));
+                    someGroup.value=targetValue;
+                    someGroup.index.push(i);
+                }else{
+                    result.push({
+                        value:initval+array[i],
+                        index:someGroup.index.slice(0).concat([i])
+                    });
+                }
+            }else{
+                break;
+            }
+
+        }
+        return {
+            matched:matched,
+            result:result
+        }
+    }
+
+    function getMatchedGroup(groupArray,orgArray,targetValue){
+        var matched=[];
+        for(var q=0;q<groupArray.length;q++){
+            var groupResult=getcombinationAndMatched(groupArray[q].value,orgArray,targetValue,groupArray[q]);
+            matched=matched.concat(groupResult.matched);
+            if(groupResult.result.length!=0){
+                var _matched_=getMatchedGroup(groupResult.result,orgArray,targetValue);
+                matched=matched.concat(_matched_);
+            }
+        }
+
+        return matched;
+
+    }
+
+
+
+</script>
+
 </body>
 </html>
