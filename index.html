@@ -29,12 +29,12 @@
       window.onload = function () {
         wx.ready(function () {
           // 在微信JS-SDK准备就绪后，可以调用微信相关的功能
-          console.log('sdk就绪')
+          console.log("sdk就绪");
         });
 
         wx.error(function (res) {
           // 如果初始化失败，可以在这里处理错误
-          console.log('sdk错误')
+          console.log("sdk错误");
         });
 
         let url = location.href.split("#")[0];
@@ -51,7 +51,7 @@
           timestamp: time, // 必填，生成签名的时间戳
           nonceStr: "nonceStr", // 必填，生成签名的随机串
           signature, // 必填，签名
-          jsApiList: ["chooseImage"], // 必填，需要使用的JS接口列表
+          jsApiList: ["chooseImage", "previewImage", "uploadImage"], // 必填，需要使用的JS接口列表
           openTagList: ["wx-open-launch-weapp"], // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
         });
       };
