@@ -26,13 +26,13 @@
       </script>
     </wx-open-launch-weapp>
     <script>
-      let url = location.href.split("#")[0];
-      const jsapi_ticket =
-        "HoagFKDcsGMVCIY2vOjf9pdULLyJDILDQmu2wzJ801nXnYuOzMyulQwesFQEDOMd1oRTlH0HftEGnTPczKOKKQ";
-      const string = `noncestr=nonceStr&jsapi_ticket=${jsapi_ticket}&timestamp=${+new Date()}&url=${url}`;
-      console.log(string);
-      const signature = sha1(string);
       window.onload = function () {
+        let url = location.href.split("#")[0];
+        const jsapi_ticket =
+          "HoagFKDcsGMVCIY2vOjf9pdULLyJDILDQmu2wzJ801nXnYuOzMyulQwesFQEDOMd1oRTlH0HftEGnTPczKOKKQ";
+        const string = `noncestr=nonceStr&jsapi_ticket=${jsapi_ticket}&timestamp=${+new Date()}&url=${url}`;
+        console.log(string);
+        const signature = sha1(string);
         wx.config({
           debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
           appId: "wx0969244d8c5a58ba", // 必填，公众号的唯一标识
