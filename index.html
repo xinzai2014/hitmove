@@ -26,8 +26,7 @@
       </script>
     </wx-open-launch-weapp>
     <script>
-      let url = "http://127.0.0.1:5500/index.html";
-      url = "https://xinzai2014.github.io/hitmove/index.html";
+      let url = location.href.split("#")[0];
       const jsapi_ticket =
         "HoagFKDcsGMVCIY2vOjf9pdULLyJDILDQmu2wzJ801nXnYuOzMyulQwesFQEDOMd1oRTlH0HftEGnTPczKOKKQ";
       const string = `noncestr=nonceStr&jsapi_ticket=${jsapi_ticket}&timestamp=${+new Date()}&url=${url}`;
