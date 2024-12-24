@@ -43,7 +43,7 @@
         let time = "1735054716";
         time = +new Date();
         let nonceStr = time;
-        const string = `jsapi_ticket=${jsapi_ticket}&noncestr=nonceStr&timestamp=${time}&url=${url}`;
+        const string = `jsapi_ticket=${jsapi_ticket}&noncestr=${nonceStr}&timestamp=${time}&url=${url}`;
         console.log(string);
         let signature = sha1(string);
         wx.config({
