@@ -30,13 +30,15 @@
         let url = location.href.split("#")[0];
         const jsapi_ticket =
           "HoagFKDcsGMVCIY2vOjf9pdULLyJDILDQmu2wzJ801nXnYuOzMyulQwesFQEDOMd1oRTlH0HftEGnTPczKOKKQ";
-        const string = `noncestr=nonceStr&jsapi_ticket=${jsapi_ticket}&timestamp=${+new Date()}&url=${url}`;
+        const time = "1735054716";
+        const string = `jsapi_ticket=${jsapi_ticket}&noncestr=nonceStr&timestamp=${time}&url=${url}`;
         console.log(string);
-        const signature = sha1(string);
+        let signature = sha1(string);
+        signature = 'ccad4a9fd502b828b9a3a14abf38fa250a2bfee0'
         wx.config({
           debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
           appId: "wx0969244d8c5a58ba", // 必填，公众号的唯一标识
-          timestamp: +new Date(), // 必填，生成签名的时间戳
+          timestamp: time, // 必填，生成签名的时间戳
           nonceStr: "nonceStr", // 必填，生成签名的随机串
           signature, // 必填，签名
           jsApiList: ["wx-open-launch-weapp"], // 必填，需要使用的JS接口列表
