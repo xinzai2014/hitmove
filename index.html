@@ -1,34 +1,49 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
     <title>新仔运动健身专用web</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="style/reset.css" />
-    <link rel="stylesheet" href="style/fit.css" />
-    <script src="js/jquery.mini.js"></script>
-    <script src="js/sound.js"></script>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script src="./js/sha1.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js "></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>调试小程序跳转</h1>
+    <wx-open-launch-weapp
+      id="launch-btn"
+      appid="wx71cc4f0b6260adf1"
+      path="pages/index/index"
+    >
+      <script type="text/wxtag-template">
+        <style>.btn { padding: 12px }</style>
+        <button class="btn">打开小程序</button>
+      </script>
+    </wx-open-launch-weapp>
     <script>
-        (function(win,doc){
-            function changeSize(){
-                doc.documentElement.style.fontSize=50*doc.documentElement.clientWidth/320+'px';
-            }
-            changeSize();
-            win.addEventListener('resize',changeSize,false);
-        })(window,document)
+      let url = "http://127.0.0.1:5500/index.html";
+      url = "https://xinzai2014.github.io/hitmove/index.html";
+      const jsapi_ticket =
+        "HoagFKDcsGMVCIY2vOjf9pdULLyJDILDQmu2wzJ801nXnYuOzMyulQwesFQEDOMd1oRTlH0HftEGnTPczKOKKQ";
+      const string = `noncestr=nonceStr&jsapi_ticket=${jsapi_ticket}&timestamp=${+new Date()}&url=${url}`;
+      console.log(string);
+      const signature = sha1(string);
+      window.onload = function () {
+        wx.config({
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
+          appId: "wx0969244d8c5a58ba", // 必填，公众号的唯一标识
+          timestamp: +new Date(), // 必填，生成签名的时间戳
+          nonceStr: "nonceStr", // 必填，生成签名的随机串
+          signature, // 必填，签名
+          jsApiList: ["wx-open-launch-weapp"], // 必填，需要使用的JS接口列表
+          openTagList: ["wx-open-launch-weapp"], // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
+        });
+      };
     </script>
-
-</head>
-<body>
-<div class="header">
-    运动计时
-</div>
-<div class="view-num" id="view-num">
-00
-</div>
-<div class="start-btn" id="btn">开始</div>
-<script src="js/fit.js"></script>
-</body>
+  </body>
 </html>
