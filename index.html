@@ -15,47 +15,9 @@
   </head>
   <body>
     <h1>调试小程序跳转</h1>
-    <wx-open-launch-weapp
-      id="launch-btn"
-      appid="wx1c4a70bbdfaa2029"
-      path="pages/index/index"
-    >
-      <script type="text/wxtag-template">
-        <style>.btn { padding: 12px }</style>
-        <button class="btn">打开小程序</button>
-      </script>
-    </wx-open-launch-weapp>
+<a href="https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wx1c4a70bbdfaa2029"></a>
     <script>
-      window.onload = function () {
-        wx.ready(function () {
-          // 在微信JS-SDK准备就绪后，可以调用微信相关的功能
-          console.log("sdk就绪");
-        });
-
-        wx.error(function (res) {
-          // 如果初始化失败，可以在这里处理错误
-          console.log("sdk错误");
-        });
-
-        let url = location.href.split("#")[0];
-        const jsapi_ticket =
-          "HoagFKDcsGMVCIY2vOjf9pdULLyJDILDQmu2wzJ801l2LPAitKXTP0XpPP4V6jhUbM-C5JJLXDpJ76CeYHMbpA";
-        let time = "1735054716";
-        time = +new Date();
-        let nonceStr = time;
-        const string = `jsapi_ticket=${jsapi_ticket}&noncestr=${nonceStr}&timestamp=${time}&url=${url}`;
-        console.log(string);
-        let signature = sha1(string);
-        wx.config({
-          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
-          appId: "wx0969244d8c5a58ba", // 必填，公众号的唯一标识
-          timestamp: time, // 必填，生成签名的时间戳
-          nonceStr, // 必填，生成签名的随机串
-          signature, // 必填，签名
-          jsApiList: ["chooseImage", "previewImage", "uploadImage"], // 必填，需要使用的JS接口列表
-          openTagList: ["wx-open-launch-weapp"], // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
-        });
-      };
+   
     </script>
   </body>
 </html>
