@@ -1,20 +1,196 @@
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
-<html lang="zh-cn">
+<!DOCTYPE html>
+<html lang="zh_CN">
   <head>
     <meta charset="UTF-8" />
-    <title>新仔运动健身专用web</title>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>社区服务</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .enter-container .row {
+        display: flex;
+        font-size: 0.3rem;
+      }
+      .enter-container .cell {
+        height: 2rem;
+        width: 25%;
+        color: inherit; /* 继承父元素的字体颜色 */
+        text-decoration: none; /* 去掉下划线 */
+        cursor: pointer; /* 设置鼠标悬停为手指形状 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .enter-container .cell img {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+      .enter-container .cell p {
+        margin-top: 0.1rem;
+      }
+    </style>
+    <script>
+      var shequ = {
+        title: "社区服务",
+        list: [
+          { label: "物业缴费", icon: "", src: "" },
+          { label: "我的投票", icon: "", src: "" },
+          { label: "在线保修", icon: "", src: "" },
+          { label: "投诉建议", icon: "", src: "" },
+        ],
+      };
+      var bianmin = {
+        title: "便民服务",
+        list: [
+          {
+            label: "国务院客户端",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wxbebb3cdd9b331046",
+          },
+          {
+            label: "住房公积金",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wxd2027ba6607f7b62",
+          },
+          {
+            label: "交管12123",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wx49a80525eebd2583",
+          },
+          {
+            label: "智联招聘",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wxb7718fb9257e4fd2",
+          },
+          {
+            label: "顺丰快递",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wxd4185d00bf7e08ac",
+          },
+          {
+            label: "中通快递",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wxd4185d00bf7e08ac",
+          },
+          {
+            label: "京东快递",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wx73247c7819d61796",
+          },
+          {
+            label: "滴滴出行",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wxaf35009675aa0b2a",
+          },
+          {
+            label: "携程旅行",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wx0e6ed4f51db9d078",
+          },
+          {
+            label: "车来了",
+            icon: "",
+            src: "https://w.shequ.189.cn/saas/h5/#/pages/common/redirectWx/index?path=%2F&appId=wx71d589ea01ce3321",
+          },
+        ],
+      };
+      function size() {
+        var docEl = document.documentElement;
+        var clientWidth = docEl.clientWidth;
+        docEl.style.fontSize = 100 * (clientWidth / 750) + "px";
+      }
+      window.onload = function () {
+        size();
+        render();
+      };
+      window.onresize = function () {
+        size();
+      };
+      function render() {
+        var query = getQueryObject();
+        var list = [];
+        if (query.type === "shequ") {
+          list = shequ.list;
+          document.title = shequ.title;
+        } else if (query.type === "bianmin") {
+          list = bianmin.list;
+          document.title = bianmin.title;
+        }
+        let content = "";
+        for (let i = 0; i < list.length; i++) {
+          var item = list[i];
+          if (i % 4 === 0) {
+            content += '<div class="row">';
+          }
+          content += `<a class="cell" href="${item.src}"><img src="${
+            item.icon || "./images/icon.png"
+          }" alt="" /><p>${item.label}</p></a>`;
+          if (i % 4 === 3) {
+            content += "</div>";
+          }
+        }
+        console.log(content);
+        document.getElementById("enter-container").innerHTML = content;
+      }
+      function getQueryObject() {
+        const search = window.location.search;
+        const obj = {};
+        const reg = /([^?&=]+)=([^?&=]*)/g;
+        search.replace(reg, (rs, $1, $2) => {
+          const name = decodeURIComponent($1);
+          let val = decodeURIComponent($2);
+          val = String(val);
+          obj[name] = val;
+          return rs;
+        });
+        return obj;
+      }
+    </script>
   </head>
   <body>
-    <h1>调试小程序跳转</h1>
-<a href="">点我打开小程序</a>
-    <script>
-   
-    </script>
+    <div class="enter-container" id="enter-container">
+      <div class="row">
+        <a class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </a>
+        <a class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </a>
+        <a class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </a>
+        <div class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </div>
+        <div class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </div>
+        <div class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </div>
+        <div class="cell">
+          <img src="./images/icon.png" alt="" />
+          <p>办事指南</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
